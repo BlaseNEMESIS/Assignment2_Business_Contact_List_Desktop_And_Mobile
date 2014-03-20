@@ -1,0 +1,21 @@
+/*
+File Name: custom.css
+Author Name: Jonathan Hodder
+Website Name: Personal Portfolio Website Mobile
+File Description: Custom CSS used for the Personal Portfolio Website Mobile Version
+*/
+/*Type customization*/
+	
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+} 
+
+@media screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+  #myImg { 
+    width:70%;
+  }
+}

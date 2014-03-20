@@ -1,0 +1,26 @@
+/*
+File Name: custom.css
+Author Name: Jonathan Hodder
+Website Name: Personal Portfolio Website
+File Description: Custom CSS used for the Personal Portfolio Website
+*/
+/*Type customization*/
+ul li {
+	display:block;
+	position:relative;}	
+	
+img{
+	text-align:center; 
+}
+body{
+	background-color:#D9D9D9;
+}
+
+/*Id customization*/
+#viewMoreWorkButton{
+	display:block;
+}
+
+#footer{
+	text-align:center;
+}
