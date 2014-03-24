@@ -35,6 +35,7 @@ Page Description: Provides user with basic information about Jonathan Hodder's P
 				<li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist" data-theme="b">Home</a></li>
 				<li><a href="#aboutMe" data-icon="star" data-theme="b">About Me</a></li>
 		    	<li><a href="#contactMe" data-icon="grid" data-theme="b">Contact Me</a></li>
+		    	<li><a href="#businessContactsScreen" data-icon="grid" data-theme="b">Business Contacts</a></li>
 	    	</ul>
 		</div>
 	</div>
@@ -76,6 +77,7 @@ File Description: Provides user with information about Jonathan Hodder on a Mobi
 				<li><a href="#home" data-icon="home" data-theme="b">Home</a></li>
 				<li><a href="#aboutMe" data-icon="star" class="ui-btn-active ui-state-persist" data-theme="b">About Me</a></li>
 		    	<li><a href="#contactMe" data-icon="grid" data-theme="b">Contact Me</a></li>
+	    		<li><a href="#businessContactsScreen" data-icon="grid" data-theme="b">Business Contacts</a></li>
 	    	</ul>
 		</div>
 	</div>
@@ -198,6 +200,7 @@ File Description: Provides user with contact information to contact Jonathan Hod
 				<li><a href="#home" data-icon="home" data-theme="b">Home</a></li>
 				<li><a href="#aboutMe" data-icon="star" data-theme="b">About Me</a></li>
 		    	<li><a href="#contactMe" data-icon="grid" class="ui-btn-active ui-state-persist" data-theme="b">Contact Me</a></li>
+	    		<li><a href="#businessContactsScreen" data-icon="grid" data-theme="b">Business Contacts</a></li>
 	    	</ul>
 		</div>
 	</div>
@@ -254,6 +257,7 @@ File Description: Provides user with links to websites created by Jonathan Hodde
 				<li><a href="#home" data-icon="home" data-theme="b">Home</a></li>
 				<li><a href="#aboutMe" data-icon="star" data-theme="b">About Me</a></li>
 		    	<li><a href="#contactMe" data-icon="grid" data-theme="b">Contact Me</a></li>
+		    	<li><a href="#businessContactsScreen" data-icon="grid" data-theme="b">Business Contacts</a></li>
 	    	</ul>
 		</div>
 	</div>
@@ -300,6 +304,7 @@ File Description: Provides user with the services that All Your Bugs can provide
 				<li><a href="#home" data-icon="home" data-theme="b">Home</a></li>
 				<li><a href="#aboutMe" data-icon="star" data-theme="b">About Me</a></li>
 		    	<li><a href="#contactMe" data-icon="grid" data-theme="b">Contact Me</a></li>
+		    	<li><a href="#businessContactsScreen" data-icon="grid" data-theme="b">Business Contacts</a></li>
 	    	</ul>
 		</div>
 	</div>
@@ -375,6 +380,71 @@ File Description: Provides user with the services that All Your Bugs can provide
 		<h4>Copyright 2013</h4>
 	</div>
 </div>
+<!--
+File Page: Business Contacts
+File Description: Provides user with Business Contacts loaded from the database on a mobile platform
+-->
+<div data-role="page" id="businessContactsScreen">
+<?php
+	require_once("m.login");
+?>
+	<div data-role="header">
+		<h1>Business Contacts</h1>
+		<div data-role="navbar">
+			<ul>
+				<!-- Nav Menu -->
+				<li><a href="javascript:history.go(-1)" data-icon="back" data-theme="b">Back</a></li>
+				<li><a href="#home" data-icon="home" data-theme="b">Home</a></li>
+				<li><a href="#aboutMe" data-icon="star" data-theme="b">About Me</a></li>
+		    	<li><a href="#contactMe" data-icon="grid" data-theme="b">Contact Me</a></li>
+	    		<li><a href="#businessContactsScreen" data-icon="grid" class="ui-btn-active ui-state-persist" data-theme="b">Business Contacts</a></li>
+	    	</ul>
+		</div>
+	</div>
+	<div data-role="content">	
+		<div data-role="navbar">
+			<ul>
+				<!-- Nav Menu Image Link-->
+				<li><a href="#projects" data-theme="b"><img src="img/projectsLink.png" style="width:50%;" alt="Projects"/></a></li>
+				<li><a href="#services" data-theme="b"><img src="img/servicesLink.png" style="width:50%;" alt="Services"/></a></li>
+	    	</ul>
+		</div>
+	</div>
+	<div data-role="footer">
+		<!-- Footer -->
+		<h4>Copyright 2013</h4>
+	</div>
+</div>
+
+<div data-role="page" id="m.login">
+	<div data-role="navbar">
+		<ul>
+			<li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist" data-theme="b">Home</a></li>
+			<li><a href="#aboutMe" data-icon="star" data-theme="b">About Me</a></li>
+			<li><a href="#contactMe" data-icon="grid" data-theme="b">Contact Me</a></li>
+		</ul>
+	</div>
+	<div data-role="content">	
+		<div data-role="navbar">
+			<ul>
+				<!-- Nav Menu Image Links -->
+				<li><a href="#projects" data-theme="b"><img src="img/projectsLink.png" style="width:50%;" alt="Projects"/></a></li>
+				<li><a href="#services" data-theme="b"><img src="img/servicesLink.png" style="width:50%;"alt="Services"/></a></li>
+			</ul>
+		</div>
+		<form action="login.php" method="post">
+			Username <input type="text" name="username"/>
+			Password <input type="password" name="password"/>
+			<input type="submit" value="Login" data-theme="b"/>
+		</form>	
+	</div>
+	<div data-role="footer">
+		<!--footer and Desktop site link-->
+		<h4>Copyright 2013</h4>
+		<h4><a href="index.html">Full Site</a></h4>
+	</div>
+</div> 	
+		
 <script type="text/javascript">
 $(window).load(function() {
 	$('#slider').nivoSlider();
