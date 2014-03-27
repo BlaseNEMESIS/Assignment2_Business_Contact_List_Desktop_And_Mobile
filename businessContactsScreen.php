@@ -1,13 +1,18 @@
-<!doctype html> 
 <!--
 File Name: businessContactsScreen.php
 Author Name: Jonathan Hodder
 Website Name: Personal Portfolio Website
 File Description: Provides user with Business Contacts loaded from the database
 -->
-<?php
-	require_once("mlogin.html");
+<?php 
+	//start the session and verify the login
+	session_start();
+	if(!isset($_SESSION['loggedIn']))
+	{
+		header("location:login.html");
+	}
 ?>
+
 <html class="no-js" lang="en">	
   <head>
     <meta charset="utf-8" />

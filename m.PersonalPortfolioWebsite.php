@@ -21,6 +21,7 @@ Website Name: Personal Portfolio Website Mobile Look up
   	<link rel="stylesheet" href="css/mobileCustom.css" media="screen and (min-device-width: 320px) and (max-device-width: 480px)"/>
   </head>
 <body>
+	
 <!--
 Page Name: Home Mobile
 Page Description: Provides user with basic information about Jonathan Hodder's Portfolio and useful links for a Mobile View.
@@ -63,6 +64,7 @@ Page Description: Provides user with basic information about Jonathan Hodder's P
 		<h4><a href="index.html">Full Site</a></h4>
 	</div>
 </div> 
+
 <!--
 Website Page: About Me Mobile
 File Description: Provides user with information about Jonathan Hodder on a Mobile View
@@ -186,6 +188,7 @@ File Description: Provides user with information about Jonathan Hodder on a Mobi
 		<h4>Copyright 2013</h4>
 	</div>
 </div>
+
 <!--
 Page Name: Contact Me Mobile
 File Description: Provides user with contact information to contact Jonathan Hodder on a Mobile View
@@ -243,6 +246,7 @@ File Description: Provides user with contact information to contact Jonathan Hod
 		<h4>Copyright 2013</h4>
 	</div>
 </div>
+
 <!--
 File Page: Projects Mobile
 File Description: Provides user with links to websites created by Jonathan Hodder for Mobile View
@@ -290,6 +294,7 @@ File Description: Provides user with links to websites created by Jonathan Hodde
 		<h4>Copyright 2013</h4>
 	</div>
 </div>
+
 <!--
 File Page: Services Mobile
 File Description: Provides user with the services that All Your Bugs can provide for Mobile View
@@ -380,14 +385,20 @@ File Description: Provides user with the services that All Your Bugs can provide
 		<h4>Copyright 2013</h4>
 	</div>
 </div>
+
 <!--
 File Page: Business Contacts
 File Description: Provides user with Business Contacts loaded from the database on a mobile platform
 -->
 <div data-role="page" id="businessContactsScreen">
-<?php
-	require_once("m.login");
-?>
+	<?php 
+		//start the session and verify the login
+		session_start();
+		if(!isset($_SESSION['loggedIn']))
+		{
+			header("location:#login");
+		}
+	?>
 	<div data-role="header">
 		<h1>Business Contacts</h1>
 		<div data-role="navbar">
@@ -416,7 +427,11 @@ File Description: Provides user with Business Contacts loaded from the database 
 	</div>
 </div>
 
-<div data-role="page" id="m.login">
+<!--
+File Page: login
+File Description: Provides user with Business Contacts loaded from the database on a mobile platform
+-->
+<div data-role="page" id="login">
 	<div data-role="navbar">
 		<ul>
 			<li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist" data-theme="b">Home</a></li>
@@ -432,7 +447,7 @@ File Description: Provides user with Business Contacts loaded from the database 
 				<li><a href="#services" data-theme="b"><img src="img/servicesLink.png" style="width:50%;"alt="Services"/></a></li>
 			</ul>
 		</div>
-		<form action="login.php" method="post">
+		<form action="#verifylogin" method="post">
 			Username <input type="text" name="username"/>
 			Password <input type="password" name="password"/>
 			<input type="submit" value="Login" data-theme="b"/>
@@ -443,8 +458,55 @@ File Description: Provides user with Business Contacts loaded from the database 
 		<h4>Copyright 2013</h4>
 		<h4><a href="index.html">Full Site</a></h4>
 	</div>
-</div> 	
+
+<!--
+File Name: verifyLogin
+File Description: Verifies a user login
+-->
+<div data-role="page" id="verifylogin">
+	<?php
+		//database variables
+		$host="localhost"; 
+		$dbUserName="BlaseNEMESIS"; 
+		$dbPassword="MAXjmhodder44";  
+		$database="business_contact_list"; 
+		$dbTable="bcl_users";
+		$loginUserName;
+		$loginPassword;
 		
+		// Connect to the server and select correct databse.
+		mysql_connect("$host", "$dbUserName", "$dbPassword") 
+					 or die("cannot connect to the Local Host."); 
+		mysql_select_db("$database") 
+					 or die("Cannot select the Database.");
+					 
+		//username and password pulled from the form 
+		$loginUserName=$_POST['loginUserName']; 
+		$loginPassword=$_POST['loginPassword']; 
+	
+		//Protection against MySQL injection
+		$loginUserName = stripslashes($loginUserName);
+		$loginUserName = mysql_real_escape_string($loginUserName);
+		$loginPassword = stripslashes($loginPassword);
+		$loginPassword = mysql_real_escape_string($loginPassword);
+		//Select the username and password from the database that match the login form information.
+		$sqlSelect="SELECT * FROM $dbTable WHERE username='$loginUserName' and password='$loginPassword'";
+		$loginResult=mysql_query($sqlSelect);	
+		// check if a valid login is in the user table
+		$count=mysql_num_rows($loginResult);
+		
+		if($count==1){
+			session_start();
+			// Register the user information and jump to the contacts page
+			$_SESSION['loggedIn'] = 'Yes';
+			header("location:businessContactsScreen.php");
+		}
+		else {
+			echo "Invalid Username or Password";
+		}
+	?>
+</div>
+				
 <script type="text/javascript">
 $(window).load(function() {
 	$('#slider').nivoSlider();

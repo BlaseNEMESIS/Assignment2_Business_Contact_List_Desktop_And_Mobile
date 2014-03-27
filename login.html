@@ -8,7 +8,7 @@ File Description: Allows a user to login
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Login</title><br>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/custom.css" />
     <script src="detectmobilebrowaer.js"></script>
@@ -18,7 +18,7 @@ File Description: Allows a user to login
   	<div class="row">
       <div class="large-12 columns">
       	<!-- Header for Login Page -->
-		<h1>Login</h1>
+		<h1>Admin Login</h1>
 	  </div>
     </div>
     <br>
@@ -34,14 +34,15 @@ File Description: Allows a user to login
 	    		<li><a href="https://github.com/BlaseNEMESIS/" class="small button">GitHub</a></li>
 	    		<li><a href="contactMe.html" class="small button">Contact Me</a></li>  
 	    	</ul>	 
-	    </div>
-		<div class="large-4 columns">		
-			<form action="login.php" method="post">
-				Username <input type="text" name="username"/><br />
-				Password <input type="password" name="password" /><br />
+	    </div>		
+		<form action="verifyLogin.php" method="post">
+				<div class="large-4 columns">		
+				Username <input type="text" name="loginUserName"/><br />
+				Password <input type="password" name="loginPassword" />
 				<input type="submit" value="Login" class="small button"/>
-			</form>
-		</div>
+				</div>
+		</form>
+		
 	</div>
   </body>
 </html>
