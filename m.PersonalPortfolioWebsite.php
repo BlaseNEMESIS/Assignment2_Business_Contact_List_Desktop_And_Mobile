@@ -393,11 +393,11 @@ File Description: Provides user with Business Contacts loaded from the database 
 <div data-role="page" id="businessContactsScreen">
 	<?php 
 		//start the session and verify the login
-		session_start();
-		if(!isset($_SESSION['loggedIn']))
-		{
-			header("location:#login");
-		}
+		//session_start();
+		//if(!isset($_SESSION['loggedIn']))
+		//{
+		//	header("location:#login");
+		//}
 	?>
 	<div data-role="header">
 		<h1>Business Contacts</h1>
@@ -420,9 +420,55 @@ File Description: Provides user with Business Contacts loaded from the database 
 				<li><a href="#services" data-theme="b"><img src="img/servicesLink.png" style="width:50%;" alt="Services"/></a></li>
 	    	</ul>
 		</div>
+		<div class="ui-grid-a">		
+			<?php
+				//database variables
+				$host="localhost"; 
+				$dbUserName="BlaseNEMESIS"; 
+				$dbPassword="MAXjmhodder44";  
+				$database="business_contact_list";
+				$dbTable="bcl_contacts";	
+						
+				// Connect to server and select database.
+				mysql_connect("$host", "$dbUserName", "$dbPassword")
+							 or die("cannot connect"); 
+				mysql_select_db("$database")
+				    			or die("cannot select DB");
+			
+				$sqlSelect = "SELECT * FROM $dbTable ORDER BY name";
+				$selectResult = mysql_query($sqlSelect)or die(mysql_error());
+			?>
+			<div class="ui-block-a">
+				<?php
+					echo"<h3>Contact Name</h3>";    
+					while($row = mysql_fetch_array($selectResult))
+					{
+						$name = $row['name'];
+						$address = $row['address'];
+						$phoneNumber = $row['phone_number'];
+						// For each name in the database populate them
+					 	echo"<h5><a href='#' onclick='alert($name <br /> $address <br /> $phoneNumber)'>$name</a></h5>"; 
+					} 
+				?>
+			</div>
+			<div class="ui-block-b">
+				<?php
+					$sqlSelect = "SELECT address FROM $dbTable ORDER BY name";
+					$selectResult = mysql_query($sqlSelect)or die(mysql_error());
+					echo"<h3>Address</h3>";    
+					while($row = mysql_fetch_array($selectResult))
+					{
+						$address = $row['address'];
+						// For each name in the database populate them
+					 	echo"<p>$address</p>"; 
+					} 
+				?>
+			</div>			
+		</div>		
 	</div>
 	<div data-role="footer">
 		<!-- Footer -->
+		<h4><a href="logout.php">Logout</a></h4>
 		<h4>Copyright 2013</h4>
 	</div>
 </div>

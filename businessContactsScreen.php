@@ -11,6 +11,23 @@ File Description: Provides user with Business Contacts loaded from the database
 	{
 		header("location:login.html");
 	}
+	//database variables
+	$host="localhost"; 
+	$dbUserName="BlaseNEMESIS"; 
+	$dbPassword="MAXjmhodder44";  
+	$database="business_contact_list";
+	$dbTable="bcl_contacts";
+	$name;
+	$contactId;
+	
+	// Connect to server and select database.
+	mysql_connect("$host", "$dbUserName", "$dbPassword")
+				 or die("cannot connect"); 
+	mysql_select_db("$database")
+				 or die("cannot select DB");
+	
+	$sqlSelect = "SELECT * FROM $dbTable ORDER BY name";
+  	$selectResult = mysql_query($sqlSelect)or die(mysql_error());
 ?>
 
 <html class="no-js" lang="en">	
@@ -44,9 +61,22 @@ File Description: Provides user with Business Contacts loaded from the database
 	    		<li><a href="businessContactsScreen.php" class="small success button">Business Contacts</a></li>   
 	    	</ul>	 
 	    </div>
-	   	<div class="large-10 columns">
+	   	<div class="large-8 columns">
+			<div class="callout panel">
+				<?php
+					echo"<h3>Contact Name<br><br></h3>";    
+		            while($row = mysql_fetch_array($selectResult))
+		  			{
+ 						$name = $row['name'];
+						$address = $row['address'];
+						$phoneNumber = $row['phone_number'];
+			 			// For each name in the database populate them
+			 			echo"<h5><a href='#' onclick='alert($name <br /> $address <br /> $phoneNumber)'>$name</a></h5>"; 
+					} 
+				?>	
+			</div>
 	    	<div class="callout panel">
-	    		<h2><a href="logout.php">Logout Here</a></h2>
+	    		<h5><a href="logout.php">Logout Here</a></h5>
 			</div>
 		</div>
     

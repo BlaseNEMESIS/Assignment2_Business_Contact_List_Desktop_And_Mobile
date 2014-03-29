@@ -35,13 +35,26 @@ File Description: Verifies a user login
 	// check if a valid login is in the user table
 	$count=mysql_num_rows($loginResult);
 	
-	if($count==1){
+	if($count==1)
+	{
 		session_start();
+		$loginPassword = md5($loginPassword);
 		// Register the user information and jump to the contacts page
 		$_SESSION['loggedIn'] = 'Yes';
 		header("location:businessContactsScreen.php");
 	}
-	else {
-		echo "Invalid Username or Password";
+	else if($loginResult['username'] != $_POST['loginUserName'] && $loginResult['password'] != $_POST['loginPassword'])
+	{
+		echo '<script type="text/javascript"> alert("The Username and Password are Invalid. Please enter valid login information")</script>';
 	}
+	else if($loginResult['username'] != $_POST['loginUserName']) 
+	{ //If the username is not a valid username
+		echo '<script type="text/javascript"> alert("The Username is Invalid.  Please enter a valid username")</script>';
+	}
+	else if($loginResult['password'] != $_POST['loginPassword']) 
+	{ //If the password is not a valid username
+		echo '<script type="text/javascript">alert("The Password is Invalid. Please enter a valid password")</script>';
+	}
+	echo '<script type="text/javascript">window.location.href = "login.html";</script>'
+	
 ?>
