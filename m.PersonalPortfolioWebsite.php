@@ -393,11 +393,12 @@ File Description: Provides user with Business Contacts loaded from the database 
 <div data-role="page" id="businessContactsScreen">
 	<?php 
 		//start the session and verify the login
-		//session_start();
-		//if(!isset($_SESSION['loggedIn']))
-		//{
-		//	header("location:#login");
-		//}
+		session_start();
+		if(!isset($_SESSION['loggedIn']) & $_SERVER['REQUEST_URI'] == 'm.PersonalPortofolioWebsite.php#businessContactsScreen')
+		{
+			$_SESSION['mobile'] = 'Yes';
+			header("location:login.html");
+		}
 	?>
 	<div data-role="header">
 		<h1>Business Contacts</h1>
@@ -447,20 +448,20 @@ File Description: Provides user with Business Contacts loaded from the database 
 						$address = $row['address'];
 						$phoneNumber = $row['phone_number'];
 						// For each name in the database populate them
-					 	echo"<h5><a href='#' onclick='alert($name <br /> $address <br /> $phoneNumber)'>$name</a></h5>"; 
+						echo"<h5><a href='#' onClick='javascript:alert(\"". 'Name: '. $name . '\n\n'. 'Address: ' . $address . '\n\n'. 'Phone Number: ' . $phoneNumber ."\"); return false;'>".$name."</a></h5>"; 
 					} 
 				?>
 			</div>
 			<div class="ui-block-b">
 				<?php
-					$sqlSelect = "SELECT address FROM $dbTable ORDER BY name";
+					$sqlSelect = "SELECT phone_number FROM $dbTable ORDER BY name";
 					$selectResult = mysql_query($sqlSelect)or die(mysql_error());
-					echo"<h3>Address</h3>";    
+					echo"<h3>Phone Number</h3>";    
 					while($row = mysql_fetch_array($selectResult))
 					{
-						$address = $row['address'];
+						$phoneNumber = $row['phone_number'];
 						// For each name in the database populate them
-					 	echo"<p>$address</p>"; 
+					 	echo'<p><a href="tel:".$phoneNumber>'.$phoneNumber.'</a></p>';
 					} 
 				?>
 			</div>			
@@ -471,86 +472,6 @@ File Description: Provides user with Business Contacts loaded from the database 
 		<h4><a href="logout.php">Logout</a></h4>
 		<h4>Copyright 2013</h4>
 	</div>
-</div>
-
-<!--
-File Page: login
-File Description: Provides user with Business Contacts loaded from the database on a mobile platform
--->
-<div data-role="page" id="login">
-	<div data-role="navbar">
-		<ul>
-			<li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist" data-theme="b">Home</a></li>
-			<li><a href="#aboutMe" data-icon="star" data-theme="b">About Me</a></li>
-			<li><a href="#contactMe" data-icon="grid" data-theme="b">Contact Me</a></li>
-		</ul>
-	</div>
-	<div data-role="content">	
-		<div data-role="navbar">
-			<ul>
-				<!-- Nav Menu Image Links -->
-				<li><a href="#projects" data-theme="b"><img src="img/projectsLink.png" style="width:50%;" alt="Projects"/></a></li>
-				<li><a href="#services" data-theme="b"><img src="img/servicesLink.png" style="width:50%;"alt="Services"/></a></li>
-			</ul>
-		</div>
-		<form action="#verifylogin" method="post">
-			Username <input type="text" name="username"/>
-			Password <input type="password" name="password"/>
-			<input type="submit" value="Login" data-theme="b"/>
-		</form>	
-	</div>
-	<div data-role="footer">
-		<!--footer and Desktop site link-->
-		<h4>Copyright 2013</h4>
-		<h4><a href="index.html">Full Site</a></h4>
-	</div>
-
-<!--
-File Name: verifyLogin
-File Description: Verifies a user login
--->
-<div data-role="page" id="verifylogin">
-	<?php
-		//database variables
-		$host="localhost"; 
-		$dbUserName="BlaseNEMESIS"; 
-		$dbPassword="MAXjmhodder44";  
-		$database="business_contact_list"; 
-		$dbTable="bcl_users";
-		$loginUserName;
-		$loginPassword;
-		
-		// Connect to the server and select correct databse.
-		mysql_connect("$host", "$dbUserName", "$dbPassword") 
-					 or die("cannot connect to the Local Host."); 
-		mysql_select_db("$database") 
-					 or die("Cannot select the Database.");
-					 
-		//username and password pulled from the form 
-		$loginUserName=$_POST['loginUserName']; 
-		$loginPassword=$_POST['loginPassword']; 
-	
-		//Protection against MySQL injection
-		$loginUserName = stripslashes($loginUserName);
-		$loginUserName = mysql_real_escape_string($loginUserName);
-		$loginPassword = stripslashes($loginPassword);
-		$loginPassword = mysql_real_escape_string($loginPassword);
-		//Select the username and password from the database that match the login form information.
-		$sqlSelect="SELECT * FROM $dbTable WHERE username='$loginUserName' and password='$loginPassword'";
-		$loginResult=mysql_query($sqlSelect);	
-		// check if a valid login is in the user table
-		$count=mysql_num_rows($loginResult);
-		
-		if($count==1){
-			session_start();
-			// Register the user information and jump to the contacts page
-			$_SESSION['loggedIn'] = 'Yes';
-			header("location:businessContactsScreen.php");
-		}
-		else {
-			echo "Invalid Username or Password";
-		}
-	?>
 </div>
 				
 <script type="text/javascript">

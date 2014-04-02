@@ -35,13 +35,21 @@ File Description: Verifies a user login
 	// check if a valid login is in the user table
 	$count=mysql_num_rows($loginResult);
 	
-	if($count==1)
+	if($count==1 & !isset($_SESSION['mobile']))
 	{
 		session_start();
 		$loginPassword = md5($loginPassword);
 		// Register the user information and jump to the contacts page
 		$_SESSION['loggedIn'] = 'Yes';
 		header("location:businessContactsScreen.php");
+	}
+	else if ($count = 1)
+	{
+		session_start();
+		$loginPassword = md5($loginPassword);
+		// Register the user information and jump to the contacts page
+		$_SESSION['loggedIn'] = 'Yes';
+		header("location:m.PersonalPortofolioWebsite.php#businessContactsScreen");
 	}
 	else if($loginResult['username'] != $_POST['loginUserName'] && $loginResult['password'] != $_POST['loginPassword'])
 	{

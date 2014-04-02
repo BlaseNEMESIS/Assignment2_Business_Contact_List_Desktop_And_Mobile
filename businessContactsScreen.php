@@ -71,7 +71,7 @@ File Description: Provides user with Business Contacts loaded from the database
 						$address = $row['address'];
 						$phoneNumber = $row['phone_number'];
 			 			// For each name in the database populate them
-			 			echo"<h5><a href='#' onclick='alert($name <br /> $address <br /> $phoneNumber)'>$name</a></h5>"; 
+			 			echo"<h5><a href='#' onClick='javascript:alert(\"". 'Name: '. $name . '\n\n'. 'Address: ' . $address . '\n\n'. 'Phone Number: ' . $phoneNumber ."\"); return false;'>".$name."</a></h5>";
 					} 
 				?>	
 			</div>
