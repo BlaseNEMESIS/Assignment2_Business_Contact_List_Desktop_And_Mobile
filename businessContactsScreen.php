@@ -79,7 +79,16 @@ File Description: Provides user with Business Contacts loaded from the database
 	    		<h5><a href="logout.php">Logout Here</a></h5>
 			</div>
 		</div>
-    
+	<div class="row">
+	    <div class="large-12 columns">
+		   	<div id = "footer">
+				<!--Footer Copyright information-->
+				<h5>CopyRight 2014  All Your Bugs.  All Rights Reserved.</h5>
+				<a href="termsOfUse.html">Terms of Use |</a>
+				<a href="privacyPolicy.html">Privacy Policy</a>
+			</div>
+	 	</div>
+	</div>
     <script src="js/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
